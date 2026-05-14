@@ -77,49 +77,16 @@ a:hover { color: var(--accent); }
 .muted { color: var(--fg-muted); }
 .accent { color: var(--accent); }
 
-/* ============ Visitor Counter ============ */
-.visitor-badge {
-  position: fixed;
-  top: 14px;
-  right: 20px;
-  z-index: 300;
-  display: flex;
-  align-items: center;
-  gap: 8px;
-  font-family: 'IBM Plex Mono', monospace;
-  font-size: 10px;
-  letter-spacing: 0.12em;
-  background: var(--bg-card);
-  border: 1px solid var(--line-strong);
-  border-radius: 999px;
-  padding: 6px 14px 6px 10px;
-  box-shadow: 0 2px 12px rgba(0,0,0,0.10);
-  pointer-events: none;
-}
-
-.visitor-pulse {
+/* ============ Visitor dot (inline in telemetry) ============ */
+.visitor-dot-inline {
   font-size: 7px;
-  color: var(--green);
+  color: var(--accent);
   animation: vpulse 1.8s ease-in-out infinite;
+  margin-right: 2px;
 }
 @keyframes vpulse {
   0%, 100% { opacity: 0.35; }
   50%       { opacity: 1; }
-}
-
-.visitor-label {
-  color: var(--fg-muted);
-  letter-spacing: 0.16em;
-}
-
-.visitor-count {
-  color: var(--fg);
-  font-weight: 500;
-  transition: transform 0.3s cubic-bezier(0.34, 1.56, 0.64, 1), color 0.3s ease;
-}
-.visitor-count.pop {
-  transform: scale(1.25);
-  color: var(--accent);
 }
 
 /* ============ Telemetry ribbon ============ */

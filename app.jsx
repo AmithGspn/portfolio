@@ -1,40 +1,6 @@
 // App shell — telemetry + nav + traceroute transition + command palette + bg graph
 const { useState, useEffect, useRef } = React;
 
-// ============ Visitor Counter ============
-function VisitorCounter() {
-  const [count, setCount] = useState(() => {
-    // show local count immediately while API loads
-    const local = parseInt(localStorage.getItem('amith-visit-count') || '0', 10) + 1;
-    localStorage.setItem('amith-visit-count', local);
-    return local;
-  });
-  const [animate, setAnimate] = useState(false);
-
-  useEffect(() => {
-    // try CountAPI for real cross-device count
-    fetch('https://api.countapi.xyz/hit/amithgspn.tech/visits')
-      .then(r => r.json())
-      .then(d => {
-        if (d && typeof d.value === 'number' && d.value > 0) {
-          setCount(d.value);
-          setAnimate(true);
-          setTimeout(() => setAnimate(false), 600);
-        }
-      })
-      .catch(() => {/* keep local fallback */});
-  }, []);
-
-  return (
-    <div className="visitor-badge">
-      <span className="visitor-pulse">●</span>
-      <span className="visitor-label">VISITORS</span>
-      <span className={`visitor-count${animate ? ' pop' : ''}`}>
-        {count.toLocaleString()}
-      </span>
-    </div>
-  );
-}
 
 function useTheme() {
   const [theme, setTheme] = useState(() => {
@@ -242,7 +208,6 @@ function App() {
 
   return (
     <div className="app" data-screen-label={screenLabel}>
-      <VisitorCounter />
       <Telemetry />
       <Nav route={route} go={go} theme={theme} setTheme={setTheme} onOpenCmd={() => setCmdOpen(true)} />
       {!isHome && <BgGraph />}
