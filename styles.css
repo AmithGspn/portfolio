@@ -162,68 +162,52 @@ a:hover { color: var(--accent); }
 .telemetry-cell .hot { color: var(--accent); }
 .telemetry-stream {
   flex: 1;
+  overflow: hidden;
+  position: relative;
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 0 20px;
   min-width: 0;
 }
 
-/* ============ Centered news ticker (home canvas) ============ */
-.center-ticker {
-  position: absolute;
-  bottom: 80px;
-  left: 50%;
-  transform: translateX(-50%);
-  display: flex;
-  align-items: center;
-  gap: 14px;
-  background: var(--bg-card);
-  border: 1px solid var(--line-strong);
-  border-radius: 999px;
-  padding: 8px 20px 8px 14px;
-  z-index: 10;
-  pointer-events: none;
-  box-shadow: 0 4px 24px rgba(0,0,0,0.08);
-  max-width: 560px;
-  width: calc(100% - 120px);
-}
-
-.center-ticker-label {
+.telemetry-news-label {
   font-family: 'IBM Plex Mono', monospace;
   font-size: 9px;
-  letter-spacing: 0.2em;
-  color: var(--bg);
-  background: var(--fg);
-  padding: 3px 9px;
-  border-radius: 999px;
+  letter-spacing: 0.18em;
+  color: var(--fg-muted);
   white-space: nowrap;
   flex-shrink: 0;
 }
 
-.center-ticker-track {
+.telemetry-news-track {
   flex: 1;
   overflow: hidden;
   position: relative;
-  height: 20px;
+  height: 100%;
   display: flex;
   align-items: center;
+  min-width: 0;
 }
 
-.center-ticker-item {
+.telemetry-news-item {
   position: absolute;
   white-space: nowrap;
   font-family: 'IBM Plex Mono', monospace;
-  font-size: 12px;
-  letter-spacing: 0.02em;
+  font-size: 11px;
+  letter-spacing: 0.04em;
   color: var(--fg);
   animation: news-slide 5s cubic-bezier(0.22, 1, 0.36, 1) forwards;
 }
 
 @keyframes news-slide {
-  0%   { transform: translateX(60px); opacity: 0; }
+  0%   { transform: translateX(50px); opacity: 0; }
   12%  { transform: translateX(0);    opacity: 1; }
   80%  { transform: translateX(0);    opacity: 1; }
   100% { transform: translateX(-40px); opacity: 0; }
 }
 
-.center-ticker-count {
+.telemetry-news-counter {
   font-family: 'IBM Plex Mono', monospace;
   font-size: 10px;
   color: var(--fg-faint);
