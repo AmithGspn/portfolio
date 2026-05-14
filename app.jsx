@@ -1,6 +1,37 @@
 // App shell — telemetry + nav + traceroute transition + command palette + bg graph
 const { useState, useEffect, useRef } = React;
 
+// ============ Visitor Counter ============
+function VisitorCounter() {
+  const [count, setCount] = useState(null);
+  const [animate, setAnimate] = useState(false);
+
+  useEffect(() => {
+    fetch('https://api.countapi.xyz/hit/amithgspn.tech/visits')
+      .then(r => r.json())
+      .then(d => {
+        if (d && typeof d.value === 'number') {
+          setCount(d.value);
+          setAnimate(true);
+          setTimeout(() => setAnimate(false), 600);
+        }
+      })
+      .catch(() => {});
+  }, []);
+
+  if (count === null) return null;
+
+  return (
+    <div className="visitor-badge">
+      <span className="visitor-pulse">●</span>
+      <span className="visitor-label">VISITORS</span>
+      <span className={`visitor-count${animate ? ' pop' : ''}`}>
+        {count.toLocaleString()}
+      </span>
+    </div>
+  );
+}
+
 function useTheme() {
   const [theme, setTheme] = useState(() => {
     const saved = localStorage.getItem('amith-theme');
@@ -207,6 +238,7 @@ function App() {
 
   return (
     <div className="app" data-screen-label={screenLabel}>
+      <VisitorCounter />
       <Telemetry />
       <Nav route={route} go={go} theme={theme} setTheme={setTheme} onOpenCmd={() => setCmdOpen(true)} />
       {!isHome && <BgGraph />}
