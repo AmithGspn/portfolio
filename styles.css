@@ -215,6 +215,52 @@ a:hover { color: var(--accent); }
   flex-shrink: 0;
 }
 
+/* ============ Centered news ticker (home canvas, top-center, no box) ============ */
+.center-ticker {
+  position: absolute;
+  top: 20px;
+  left: 50%;
+  transform: translateX(-50%);
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  z-index: 10;
+  pointer-events: none;
+  white-space: nowrap;
+}
+.center-ticker-label {
+  font-family: 'IBM Plex Mono', monospace;
+  font-size: 9px;
+  letter-spacing: 0.2em;
+  color: var(--fg-muted);
+  text-transform: uppercase;
+  flex-shrink: 0;
+}
+.center-ticker-track {
+  position: relative;
+  height: 18px;
+  width: 420px;
+  overflow: hidden;
+  display: flex;
+  align-items: center;
+}
+.center-ticker-item {
+  position: absolute;
+  white-space: nowrap;
+  font-family: 'IBM Plex Mono', monospace;
+  font-size: 12px;
+  letter-spacing: 0.04em;
+  color: var(--fg);
+  animation: news-slide 5s cubic-bezier(0.22, 1, 0.36, 1) forwards;
+}
+.center-ticker-count {
+  font-family: 'IBM Plex Mono', monospace;
+  font-size: 10px;
+  color: var(--fg-faint);
+  letter-spacing: 0.08em;
+  flex-shrink: 0;
+}
+
 /* sparkline mini */
 .spark {
   display: inline-flex;

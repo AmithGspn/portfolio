@@ -53,6 +53,8 @@ function HomePage({ go, data }) {
 
       <NodeAtlas go={go} data={data} />
 
+      <CenterNewsTicker />
+
       <div className="atlas-hint">
         <div>drag<span className="key">canvas</span></div>
         <div>hover<span className="key">node</span></div>
