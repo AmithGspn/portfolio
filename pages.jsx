@@ -1,6 +1,40 @@
 // All inner pages — restyled with packet-inspector + AS-path breadcrumb headers
 const { useState: useStateP, useEffect: useEffectP, useMemo: useMemoP } = React;
 
+// ============ Centered News Ticker ============
+const INDUSTRY_NEWS = [
+  'Agentic AI Replaces Network Copilots Industry-Wide',
+  'Wi-Fi 7 Enterprise Adoption Accelerating Fastest Ever',
+  'Nokia & Ericsson Split Virgin Media O2 5G Contract',
+  'Data Center Networking Market Hits $103 Billion',
+  'Belden-Ruckus Deal Reshapes IT/OT Networking',
+  '$749B Projected for AI Infrastructure by 2028',
+  'Telecom OSS/BSS Silos Finally Breaking Down',
+];
+
+function CenterNewsTicker() {
+  const [idx, setIdx] = useStateP(0);
+
+  useEffectP(() => {
+    const id = setInterval(() => {
+      setIdx(i => (i + 1) % INDUSTRY_NEWS.length);
+    }, 5000);
+    return () => clearInterval(id);
+  }, []);
+
+  return (
+    <div className="center-ticker">
+      <span className="center-ticker-label">NET NEWS</span>
+      <div className="center-ticker-track">
+        <span key={idx} className="center-ticker-item">
+          {INDUSTRY_NEWS[idx]}
+        </span>
+      </div>
+      <span className="center-ticker-count">{idx + 1} / {INDUSTRY_NEWS.length}</span>
+    </div>
+  );
+}
+
 // ============ HOME (atlas) ============
 function HomePage({ go, data }) {
   return (
@@ -18,6 +52,8 @@ function HomePage({ go, data }) {
       </div>
 
       <NodeAtlas go={go} data={data} />
+
+      <CenterNewsTicker />
 
       <div className="atlas-hint">
         <div>drag<span className="key">canvas</span></div>

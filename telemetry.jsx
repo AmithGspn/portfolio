@@ -64,17 +64,7 @@ function Telemetry() {
         RTT <span className="val">{latency[latency.length-1].toFixed(0)}ms</span>
       </div>
 
-      <div className="telemetry-stream">
-        <span className="telemetry-news-label">NET NEWS</span>
-        <div className="telemetry-news-track">
-          <span key={newsIdx} className="telemetry-news-item">
-            {INDUSTRY_NEWS[newsIdx]}
-          </span>
-        </div>
-        <span className="telemetry-news-counter">
-          {newsIdx + 1}/{INDUSTRY_NEWS.length}
-        </span>
-      </div>
+      <div className="telemetry-stream" />
 
       <div className="telemetry-cell" style={{ borderRight: 'none', borderLeft: '1px solid var(--line)' }}>
         UPLINK <span className="hot">●</span> <span className="val">UP</span>
