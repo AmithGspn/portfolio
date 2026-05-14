@@ -6,14 +6,14 @@ function HomePage({ go, data }) {
   return (
     <div className="atlas">
       <div className="atlas-headline">
-        <div className="eyebrow">PhD Candidate · University of South Carolina</div>
+        <div className="eyebrow">PhD Candidate · University of South Carolina · Computer Networks & Security</div>
         <h1>
-          A <em>network</em><br/>
-          for studying<br/>
-          networks.
+          Research,<br/>
+          labs &amp; writing<br/>
+          <em>mapped live.</em>
         </h1>
         <p>
-          <strong style={{ color: 'var(--fg)' }}>Amith Gspn</strong> — every node on this map is a piece of my research, writing, or teaching. Drag to pan. Hover to inspect. Click to enter.
+          Explore papers, hands-on security labs, blog posts, and courses — all organized as an interactive network map. Hover any node to preview. Click to dive in.
         </p>
       </div>
 
@@ -27,10 +27,10 @@ function HomePage({ go, data }) {
 
       <div className="atlas-legend">
         <div><span className="legend-dot" style={{ background: 'var(--accent)' }}></span>RESEARCH</div>
-        <div><span className="legend-dot" style={{ background: 'var(--accent-2)' }}></span>PUBS</div>
+        <div><span className="legend-dot" style={{ background: 'var(--accent-2)' }}></span>PUBLICATIONS</div>
         <div><span className="legend-dot" style={{ background: 'var(--blue)' }}></span>BLOG</div>
         <div><span className="legend-dot" style={{ background: 'var(--green)' }}></span>LABS</div>
-        <div><span className="legend-dot" style={{ background: 'var(--violet)' }}></span>TEACH</div>
+        <div><span className="legend-dot" style={{ background: 'var(--violet)' }}></span>TEACHING</div>
       </div>
 
       <div className="atlas-readout">

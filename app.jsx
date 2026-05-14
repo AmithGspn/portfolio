@@ -65,7 +65,6 @@ function Nav({ route, go, theme, setTheme, onOpenCmd }) {
             </svg>
           </div>
           <span className="brand-name">Amith Gspn</span>
-          <span className="brand-sub">— PHD</span>
         </div>
 
         <div className="nav-center">

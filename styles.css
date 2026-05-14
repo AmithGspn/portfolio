@@ -79,8 +79,7 @@ a:hover { color: var(--accent); }
 
 /* ============ Telemetry ribbon ============ */
 .telemetry {
-  position: sticky;
-  top: 0;
+  position: relative;
   z-index: 100;
   background: var(--bg);
   border-bottom: 1px solid var(--line);
@@ -159,13 +158,11 @@ a:hover { color: var(--accent); }
   transition: height 0.3s ease;
 }
 
-/* ============ Nav (slim, on inner pages) ============ */
+/* ============ Nav ============ */
 .nav {
-  position: sticky;
-  top: 32px;
+  position: relative;
   z-index: 50;
-  backdrop-filter: blur(16px);
-  background: color-mix(in oklab, var(--bg) 80%, transparent);
+  background: var(--bg);
   border-bottom: 1px solid var(--line);
 }
 
@@ -280,7 +277,7 @@ a:hover { color: var(--accent); }
 /* ============ Atlas (home) ============ */
 .atlas {
   position: fixed;
-  top: 32px; /* below telemetry */
+  top: 85px; /* below telemetry (32px) + nav (~53px) */
   left: 0; right: 0; bottom: 0;
   background: var(--bg);
   overflow: hidden;
@@ -294,20 +291,20 @@ a:hover { color: var(--accent); }
 
 .atlas-headline {
   position: absolute;
-  top: 56px;
+  top: 40px;
   left: 48px;
-  max-width: 420px;
+  max-width: 520px;
   pointer-events: none;
   z-index: 5;
 }
 .atlas-headline .eyebrow {
-  margin-bottom: 14px;
+  margin-bottom: 16px;
 }
 .atlas-headline h1 {
   font-family: 'DM Sans', system-ui, sans-serif;
-  font-size: clamp(40px, 4.6vw, 64px);
+  font-size: clamp(52px, 6.5vw, 88px);
   font-weight: 500;
-  line-height: 0.98;
+  line-height: 0.95;
   letter-spacing: -0.04em;
 }
 .atlas-headline h1 em {
@@ -316,11 +313,11 @@ a:hover { color: var(--accent); }
   color: var(--fg);
 }
 .atlas-headline p {
-  margin-top: 18px;
-  font-size: 14px;
+  margin-top: 20px;
+  font-size: 15px;
   color: var(--fg-muted);
-  max-width: 38ch;
-  line-height: 1.55;
+  max-width: 44ch;
+  line-height: 1.6;
 }
 
 .atlas-legend {

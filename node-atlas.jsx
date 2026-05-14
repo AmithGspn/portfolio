@@ -19,7 +19,7 @@ const HUB_LABEL_NICE = {
   publications: 'PUBLICATIONS',
   blog:         'BLOG',
   labs:         'LABS',
-  teaching:     'TEACH',
+  teaching:     'TEACHING',
   talks:        'TALKS',
   cv:           'CV'
 };
