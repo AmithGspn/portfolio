@@ -1,6 +1,39 @@
-// App shell — telemetry + nav + traceroute transition + command palette + bg graph
+// App shell — single unified nav bar
 const { useState, useEffect, useRef } = React;
 
+const INDUSTRY_NEWS = [
+  'Agentic AI Replaces Network Copilots Industry-Wide',
+  'Wi-Fi 7 Enterprise Adoption Accelerating Fastest Ever',
+  'Nokia & Ericsson Split Virgin Media O2 5G Contract',
+  'Data Center Networking Market Hits $103 Billion',
+  'Belden-Ruckus Deal Reshapes IT/OT Networking',
+  '$749B Projected for AI Infrastructure by 2028',
+  'Telecom OSS/BSS Silos Finally Breaking Down',
+];
+
+function SunIcon() {
+  return (
+    <svg viewBox="0 0 16 16" width="14" height="14" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round">
+      <circle cx="8" cy="8" r="2.8" />
+      <line x1="8" y1="1" x2="8" y2="2.5" />
+      <line x1="8" y1="13.5" x2="8" y2="15" />
+      <line x1="1" y1="8" x2="2.5" y2="8" />
+      <line x1="13.5" y1="8" x2="15" y2="8" />
+      <line x1="2.93" y1="2.93" x2="4.0" y2="4.0" />
+      <line x1="12.0" y1="12.0" x2="13.07" y2="13.07" />
+      <line x1="13.07" y1="2.93" x2="12.0" y2="4.0" />
+      <line x1="4.0" y1="12.0" x2="2.93" y2="13.07" />
+    </svg>
+  );
+}
+
+function MoonIcon() {
+  return (
+    <svg viewBox="0 0 16 16" width="14" height="14" fill="currentColor">
+      <path d="M12.3 10.9A6 6 0 0 1 5.1 3.7 6 6 0 1 0 12.3 10.9z" />
+    </svg>
+  );
+}
 
 function useTheme() {
   const [theme, setTheme] = useState(() => {
@@ -37,59 +70,108 @@ function useRoute() {
 }
 
 const SECTIONS = [
-  { key: 'research', label: 'Research' },
+  { key: 'research',     label: 'Research' },
   { key: 'publications', label: 'Publications' },
-  { key: 'blog', label: 'Blog' },
-  { key: 'labs', label: 'Labs' },
-  { key: 'teaching', label: 'Teaching' },
-  { key: 'talks', label: 'Talks' },
-  { key: 'cv', label: 'CV' }
+  { key: 'blog',         label: 'Blog' },
+  { key: 'labs',         label: 'Labs' },
+  { key: 'teaching',     label: 'Teaching' },
+  { key: 'talks',        label: 'Talks' },
+  { key: 'cv',           label: 'CV' }
 ];
 
 function Nav({ route, go, theme, setTheme, onOpenCmd }) {
   const activeKey = route.page.split('-')[0];
+
+  // UTC clock
+  const [time, setTime] = useState(() => new Date());
+  useEffect(() => {
+    const id = setInterval(() => setTime(new Date()), 1000);
+    return () => clearInterval(id);
+  }, []);
+  const utc = time.toISOString().slice(11, 19);
+
+  // News ticker
+  const [newsIdx, setNewsIdx] = useState(0);
+  useEffect(() => {
+    const id = setInterval(() => setNewsIdx(i => (i + 1) % INDUSTRY_NEWS.length), 5000);
+    return () => clearInterval(id);
+  }, []);
+
+  // Visitor count
+  const [visitors, setVisitors] = useState(() => {
+    const local = parseInt(localStorage.getItem('amith-visit-count') || '0', 10) + 1;
+    localStorage.setItem('amith-visit-count', local);
+    return local;
+  });
+  useEffect(() => {
+    fetch('https://api.countapi.xyz/hit/amithgspn.tech/visits')
+      .then(r => r.json())
+      .then(d => { if (d && d.value > 0) setVisitors(d.value); })
+      .catch(() => {});
+  }, []);
+
   return (
     <nav className="nav">
       <div className="nav-inner">
+
+        {/* ── Brand ── */}
         <div className="brand" onClick={() => go({ page: 'home' })}>
           <div className="brand-mark">
-            <svg viewBox="0 0 24 24" width="24" height="24">
-              <circle cx="5" cy="6" r="1.6" fill="var(--accent)" />
-              <circle cx="19" cy="7" r="1.6" fill="var(--fg)" />
+            <svg viewBox="0 0 24 24" width="20" height="20">
+              <circle cx="5"  cy="6"  r="1.6" fill="var(--accent)" />
+              <circle cx="19" cy="7"  r="1.6" fill="var(--fg)" />
               <circle cx="12" cy="12" r="2.4" fill="var(--accent)" />
-              <circle cx="5" cy="19" r="1.6" fill="var(--fg)" />
+              <circle cx="5"  cy="19" r="1.6" fill="var(--fg)" />
               <circle cx="19" cy="19" r="1.6" fill="var(--fg)" />
-              <line x1="5" y1="6" x2="12" y2="12" stroke="var(--fg)" strokeWidth="0.6" />
-              <line x1="19" y1="7" x2="12" y2="12" stroke="var(--fg)" strokeWidth="0.6" />
-              <line x1="12" y1="12" x2="5" y2="19" stroke="var(--fg)" strokeWidth="0.6" />
+              <line x1="5"  y1="6"  x2="12" y2="12" stroke="var(--fg)" strokeWidth="0.6" />
+              <line x1="19" y1="7"  x2="12" y2="12" stroke="var(--fg)" strokeWidth="0.6" />
+              <line x1="12" y1="12" x2="5"  y2="19" stroke="var(--fg)" strokeWidth="0.6" />
               <line x1="12" y1="12" x2="19" y2="19" stroke="var(--fg)" strokeWidth="0.6" />
             </svg>
           </div>
           <span className="brand-name">Amith Gspn</span>
         </div>
 
+        {/* ── Telemetry mini ── */}
+        <div className="nav-telemetry">
+          <span className="nav-tel-cell">UTC <span className="val">{utc}</span></span>
+        </div>
+
+        {/* ── NET NEWS center ── */}
+        <div className="nav-news">
+          <span className="nav-news-label">NET NEWS</span>
+          <div className="nav-news-track">
+            <span key={newsIdx} className="nav-news-item">{INDUSTRY_NEWS[newsIdx]}</span>
+          </div>
+          <span className="nav-news-count">{newsIdx + 1}/{INDUSTRY_NEWS.length}</span>
+        </div>
+
+        {/* ── Page links ── */}
         <div className="nav-center">
           {SECTIONS.map(s => (
-            <div
-              key={s.key}
-              className={`nav-link ${activeKey === s.key ? 'active' : ''}`}
-              onClick={() => go({ page: s.key })}
-            >
+            <div key={s.key} className={`nav-link ${activeKey === s.key ? 'active' : ''}`} onClick={() => go({ page: s.key })}>
               {s.label}
             </div>
           ))}
         </div>
 
+        {/* ── Right controls ── */}
         <div className="nav-right">
           <div className="cmd-trigger" onClick={onOpenCmd} title="Open command palette">
             <span className="label">$ goto…</span>
             <kbd>/</kbd>
           </div>
-          <div className="theme-toggle">
-            <button className={theme === 'light' ? 'on' : ''} onClick={() => setTheme('light')}>LT</button>
-            <button className={theme === 'dark' ? 'on' : ''} onClick={() => setTheme('dark')}>DK</button>
+          <button className="theme-icon-btn" onClick={() => setTheme(theme === 'dark' ? 'light' : 'dark')} title="Toggle theme">
+            {theme === 'dark' ? <SunIcon /> : <MoonIcon />}
+          </button>
+          <div className="nav-tel-cell" style={{ borderLeft: '1px solid var(--line)', paddingLeft: 12 }}>
+            <span className="visitor-dot-inline">●</span> VISITORS <span className="val">{visitors.toLocaleString()}</span>
+          </div>
+          <div className="nav-tel-cell nav-uplink">
+            UPLINK <span className="hot">●</span> <span className="val">UP</span>
           </div>
         </div>
+
       </div>
     </nav>
   );
@@ -132,16 +214,9 @@ function Footer({ go, data }) {
 }
 
 function BgGraph() {
-  // Render a single persistent background graph — uses NetworkGraph helper
   return (
     <div className="bg-graph">
-      <NetworkGraph
-        count={45}
-        density={0.18}
-        seed={73}
-        intensity={0.4}
-        interactive={false}
-      />
+      <NetworkGraph count={45} density={0.18} seed={73} intensity={0.4} interactive={false} />
     </div>
   );
 }
@@ -154,7 +229,6 @@ function App() {
   const [cmdOpen, setCmdOpen] = useState(false);
   const data = window.PORTFOLIO;
 
-  // routing with traceroute overlay
   const go = (r) => {
     if (r.page === route.page && r.id === route.id) return;
     setTraceTarget(r.page);
@@ -164,24 +238,17 @@ function App() {
       window.location.hash = hash;
       setRoute(r);
       window.scrollTo({ top: 0, behavior: 'instant' });
-      // hide trace shortly after content swaps
       setTimeout(() => setTracing(false), 200);
     }, 650);
   };
 
-  // global "/" to open command palette
   useEffect(() => {
     const k = (e) => {
       const t = e.target;
       const tag = t && t.tagName;
       const isInput = tag === 'INPUT' || tag === 'TEXTAREA' || (t && t.isContentEditable);
-      if (e.key === '/' && !isInput) {
-        e.preventDefault();
-        setCmdOpen(true);
-      } else if ((e.metaKey || e.ctrlKey) && e.key === 'k') {
-        e.preventDefault();
-        setCmdOpen(true);
-      }
+      if (e.key === '/' && !isInput) { e.preventDefault(); setCmdOpen(true); }
+      else if ((e.metaKey || e.ctrlKey) && e.key === 'k') { e.preventDefault(); setCmdOpen(true); }
     };
     window.addEventListener('keydown', k);
     return () => window.removeEventListener('keydown', k);
@@ -192,23 +259,22 @@ function App() {
 
   let body;
   switch (route.page) {
-    case 'home': body = <HomePage go={go} data={data} />; break;
-    case 'research': body = <ResearchPage go={go} data={data} />; break;
-    case 'research-detail': body = <ResearchDetail go={go} data={data} id={route.id} />; break;
-    case 'publications': body = <PublicationsPage data={data} />; break;
-    case 'blog': body = <BlogPage go={go} data={data} />; break;
-    case 'blog-detail': body = <BlogDetail go={go} data={data} id={route.id} />; break;
-    case 'labs': body = <LabsPage go={go} data={data} />; break;
-    case 'lab-detail': body = <LabDetail go={go} data={data} id={route.id} />; break;
-    case 'teaching': body = <TeachingPage data={data} />; break;
-    case 'talks': body = <TalksPage data={data} />; break;
-    case 'cv': body = <CVPage data={data} />; break;
-    default: body = <HomePage go={go} data={data} />;
+    case 'home':             body = <HomePage go={go} data={data} />; break;
+    case 'research':         body = <ResearchPage go={go} data={data} />; break;
+    case 'research-detail':  body = <ResearchDetail go={go} data={data} id={route.id} />; break;
+    case 'publications':     body = <PublicationsPage data={data} />; break;
+    case 'blog':             body = <BlogPage go={go} data={data} />; break;
+    case 'blog-detail':      body = <BlogDetail go={go} data={data} id={route.id} />; break;
+    case 'labs':             body = <LabsPage go={go} data={data} />; break;
+    case 'lab-detail':       body = <LabDetail go={go} data={data} id={route.id} />; break;
+    case 'teaching':         body = <TeachingPage data={data} />; break;
+    case 'talks':            body = <TalksPage data={data} />; break;
+    case 'cv':               body = <CVPage data={data} />; break;
+    default:                 body = <HomePage go={go} data={data} />;
   }
 
   return (
     <div className="app" data-screen-label={screenLabel}>
-      <Telemetry />
       <Nav route={route} go={go} theme={theme} setTheme={setTheme} onOpenCmd={() => setCmdOpen(true)} />
       {!isHome && <BgGraph />}
       {body}

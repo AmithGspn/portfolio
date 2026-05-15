@@ -242,7 +242,7 @@ a:hover { color: var(--accent); }
   transition: height 0.3s ease;
 }
 
-/* ============ Nav ============ */
+/* ============ Nav — single unified bar ============ */
 .nav {
   position: relative;
   z-index: 50;
@@ -253,115 +253,171 @@ a:hover { color: var(--accent); }
 .nav-inner {
   display: flex;
   align-items: center;
-  justify-content: space-between;
-  padding: 14px 32px;
-  max-width: 1400px;
-  margin: 0 auto;
-  gap: 24px;
+  padding: 0 20px;
+  height: 46px;
+  gap: 0;
+  overflow: hidden;
 }
 
+/* Brand */
 .brand {
   display: flex;
   align-items: center;
-  gap: 10px;
+  gap: 8px;
   font-family: 'DM Sans', system-ui, sans-serif;
-  font-size: 20px;
+  font-size: 16px;
   cursor: pointer;
   white-space: nowrap;
   flex-shrink: 0;
   color: var(--fg);
+  padding-right: 16px;
+  border-right: 1px solid var(--line);
 }
-.brand-mark { width: 24px; height: 24px; }
+.brand-mark { width: 20px; height: 20px; flex-shrink: 0; }
 .brand-name { letter-spacing: -0.02em; }
-.brand-sub {
+
+/* Telemetry mini cells */
+.nav-telemetry {
+  display: flex;
+  align-items: center;
+  flex-shrink: 0;
+}
+.nav-tel-cell {
   font-family: 'IBM Plex Mono', monospace;
   font-size: 10px;
-  letter-spacing: 0.12em;
+  letter-spacing: 0.08em;
   color: var(--fg-muted);
-  text-transform: uppercase;
-  margin-left: 2px;
+  padding: 0 14px;
+  border-right: 1px solid var(--line);
+  white-space: nowrap;
+  display: flex;
+  align-items: center;
+  gap: 5px;
+  height: 46px;
+}
+.nav-tel-cell .val { color: var(--fg); }
+.nav-tel-cell .hot { color: var(--accent); }
+.nav-uplink { border-right: none; }
+
+/* NET NEWS center ticker */
+.nav-news {
+  flex: 1;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 0 16px;
+  min-width: 0;
+  border-right: 1px solid var(--line);
+  height: 46px;
+  overflow: hidden;
+}
+.nav-news-label {
+  font-family: 'IBM Plex Mono', monospace;
+  font-size: 9px;
+  letter-spacing: 0.2em;
+  color: var(--fg-muted);
+  flex-shrink: 0;
+}
+.nav-news-track {
+  flex: 1;
+  position: relative;
+  overflow: hidden;
+  height: 18px;
+  display: flex;
+  align-items: center;
+  min-width: 0;
+}
+.nav-news-item {
+  position: absolute;
+  white-space: nowrap;
+  font-family: 'IBM Plex Mono', monospace;
+  font-size: 11px;
+  letter-spacing: 0.03em;
+  color: var(--fg);
+  animation: news-slide 5s cubic-bezier(0.22, 1, 0.36, 1) forwards;
+}
+.nav-news-count {
+  font-family: 'IBM Plex Mono', monospace;
+  font-size: 10px;
+  color: var(--fg-faint);
+  flex-shrink: 0;
 }
 
+/* Page links */
 .nav-center {
   display: flex;
   align-items: center;
-  gap: 2px;
-  flex: 1;
-  justify-content: center;
+  gap: 0;
+  flex-shrink: 0;
+  padding: 0 8px;
+  border-right: 1px solid var(--line);
+  height: 46px;
 }
 .nav-link {
-  font-size: 13px;
-  padding: 6px 12px;
+  font-size: 12px;
+  padding: 5px 10px;
   border-radius: 999px;
   cursor: pointer;
   color: var(--fg-muted);
   transition: all 0.15s ease;
+  white-space: nowrap;
 }
 .nav-link:hover { color: var(--fg); }
-.nav-link.active {
-  color: var(--accent);
-  background: var(--accent-soft);
-}
+.nav-link.active { color: var(--accent); background: var(--accent-soft); }
 
+/* Right controls */
 .nav-right {
   display: flex;
   align-items: center;
-  gap: 10px;
+  gap: 0;
   flex-shrink: 0;
 }
 
 .cmd-trigger {
   display: flex;
   align-items: center;
-  gap: 8px;
+  gap: 6px;
   font-family: 'IBM Plex Mono', monospace;
-  font-size: 11px;
+  font-size: 10px;
   color: var(--fg-muted);
   letter-spacing: 0.06em;
   background: var(--bg-elev);
   border: 1px solid var(--line);
   border-radius: 6px;
-  padding: 5px 10px;
+  padding: 4px 9px;
   cursor: pointer;
+  margin: 0 10px;
+  white-space: nowrap;
 }
 .cmd-trigger:hover { border-color: var(--accent); color: var(--accent); }
 .cmd-trigger kbd {
   font-family: inherit;
   background: var(--bg);
   border: 1px solid var(--line);
-  padding: 1px 6px;
+  padding: 1px 5px;
   border-radius: 3px;
-  font-size: 10px;
+  font-size: 9px;
 }
 
-.theme-toggle {
-  display: flex;
-  align-items: center;
-  background: var(--bg-elev);
-  border: 1px solid var(--line);
-  border-radius: 999px;
-  padding: 2px;
-}
-.theme-toggle button {
+/* Sun / Moon toggle */
+.theme-icon-btn {
   background: none;
   border: none;
-  padding: 4px 8px;
-  border-radius: 999px;
   cursor: pointer;
   color: var(--fg-muted);
-  font-size: 10px;
-  font-family: 'IBM Plex Mono', monospace;
-  letter-spacing: 0.1em;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 6px 10px;
+  border-radius: 6px;
+  transition: color 0.15s ease, background 0.15s ease;
 }
-.theme-toggle button.on {
-  background: var(--bg-card);
-  color: var(--fg);
-}
+.theme-icon-btn:hover { color: var(--fg); background: var(--accent-soft); }
 
 /* ============ Atlas (home) ============ */
 .atlas {
   position: fixed;
-  top: 85px; /* below telemetry (32px) + nav (~53px) */
+  top: 46px; /* single unified nav bar */
   left: 0; right: 0; bottom: 0;
   background: var(--bg);
   overflow: hidden;
