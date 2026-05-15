@@ -506,66 +506,106 @@ function TalksPage({ data }) {
 
 // ============ CV ============
 function CVPage({ data }) {
+  const cv = data.cv;
   return (
     <div className="container page">
       <header className="page-header">
         <PathBreadcrumb path={['atlas', 'cv']} />
-        <h1>The <em>long form.</em></h1>
-        <p>
-          A condensed CV. Download a PDF version, or reach out if you need a tailored academic or industry version.
+        <h1>Amith <em>Gspn.</em></h1>
+        <p>PhD Candidate, Informatics · University of South Carolina · Columbia, SC<br/>
+          <span style={{ fontFamily: "'IBM Plex Mono', monospace", fontSize: 13 }}>
+            amithgspn@sc.edu · 312-721-9433
+          </span>
         </p>
-        <div style={{ marginTop: 20, display: 'flex', gap: 8 }}>
-          <button className="pkt-btn">Download PDF</button>
-          <button className="pkt-btn">Google Scholar</button>
-          <button className="pkt-btn">ORCID</button>
+        <div style={{ marginTop: 20, display: 'flex', gap: 8, flexWrap: 'wrap' }}>
+          <a href="https://linkedin.com" target="_blank" className="pkt-btn">LinkedIn ↗</a>
+          <a href="https://github.com" target="_blank" className="pkt-btn">GitHub ↗</a>
         </div>
       </header>
 
-      <div className="cv-grid">
-        <div className="cv-sidebar">
-          <div className="placeholder-img headshot">HEADSHOT 4:5</div>
-          <div style={{ fontFamily: "'DM Sans', system-ui, sans-serif", fontSize: 28, letterSpacing: '-0.02em', marginBottom: 8 }}>
-            {data.bio.name}
-          </div>
-          <div className="muted" style={{ fontSize: 13, marginBottom: 16, lineHeight: 1.6 }}>
-            {data.bio.short} · {data.bio.long}<br/>
-            {data.bio.affiliation}<br/>
-            {data.bio.location}
-          </div>
-          <div className="muted" style={{ fontSize: 13, lineHeight: 1.7 }}>
-            {data.bio.longBio}
-          </div>
-
-          <div className="cv-section" style={{ marginTop: 32 }}>
-            <h3>Skills</h3>
-            <div style={{ display: 'flex', flexWrap: 'wrap', gap: 6 }}>
-              {data.cv.skills.map(s => <span key={s} className="tag">{s}</span>)}
+      {/* Education */}
+      <div className="cv-section">
+        <div className="cv-section-label">Education</div>
+        {cv.education.map((e, i) => (
+          <div key={i} className="cv-item">
+            <div className="cv-when">{e.when}</div>
+            <div className="cv-what">
+              <h4>{e.what}</h4>
+              <p className="muted">{e.where}</p>
             </div>
           </div>
-        </div>
+        ))}
+      </div>
 
-        <div>
-          {[
-            ['Education', data.cv.education],
-            ['Industry experience', data.cv.experience],
-            ['Awards & honors', data.cv.awards],
-            ['Service', data.cv.service]
-          ].map(([heading, items]) => (
-            <div key={heading} className="cv-section">
-              <h3>{heading}</h3>
-              {items.map((e, i) => (
-                <div key={i} className="cv-item">
-                  <div className="cv-when">{e.when}</div>
-                  <div className="cv-what">
-                    <h4>{e.what}</h4>
-                    <p>{e.where}</p>
-                  </div>
-                </div>
-              ))}
+      {/* Papers */}
+      <div className="cv-section">
+        <div className="cv-section-label">Papers &amp; Presentations</div>
+        {cv.papers.map((p, i) => (
+          <div key={i} className="cv-item">
+            <div className="cv-when">{p.when}</div>
+            <div className="cv-what">
+              <h4>{p.what}</h4>
+              <p className="muted">{p.where}</p>
             </div>
-          ))}
+          </div>
+        ))}
+      </div>
+
+      {/* Grant Work */}
+      <div className="cv-section">
+        <div className="cv-section-label">Grant Work</div>
+        {cv.grants.map((g, i) => (
+          <div key={i} className="cv-item">
+            <div className="cv-when">{g.when}</div>
+            <div className="cv-what">
+              <h4>{g.what}</h4>
+              <p className="muted">{g.where}</p>
+            </div>
+          </div>
+        ))}
+      </div>
+
+      {/* Work Experience */}
+      <div className="cv-section">
+        <div className="cv-section-label">Work Experience</div>
+        {cv.experience.map((e, i) => (
+          <div key={i} className="cv-item cv-item-tall">
+            <div className="cv-when">{e.when}</div>
+            <div className="cv-what">
+              <h4>{e.what}</h4>
+              <p className="muted" style={{ marginBottom: 10 }}>{e.where}</p>
+              {e.bullets && (
+                <ul className="cv-bullets">
+                  {e.bullets.map((b, j) => <li key={j}>{b}</li>)}
+                </ul>
+              )}
+            </div>
+          </div>
+        ))}
+      </div>
+
+      {/* Certifications */}
+      <div className="cv-section">
+        <div className="cv-section-label">Certifications</div>
+        {cv.certifications.map((c, i) => (
+          <div key={i} className="cv-item">
+            <div className="cv-when">{c.when}</div>
+            <div className="cv-what">
+              <h4>{c.what}</h4>
+              <p className="muted">{c.where}</p>
+            </div>
+          </div>
+        ))}
+      </div>
+
+      {/* Skills */}
+      <div className="cv-section">
+        <div className="cv-section-label">Technical Skills</div>
+        <div style={{ display: 'flex', flexWrap: 'wrap', gap: 8, marginTop: 12 }}>
+          {cv.skills.map(s => <span key={s} className="tag">{s}</span>)}
         </div>
       </div>
+
     </div>
   );
 }

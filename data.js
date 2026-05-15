@@ -326,34 +326,91 @@ window.PORTFOLIO = {
 
   cv: {
     education: [
-      { when: "2021 — Now", what: "PhD, Computer Science", where: "University of South Carolina · Advisor: Prof. S. Ahmad" },
-      { when: "2019 — 2021", what: "MS, Computer Science", where: "University of South Carolina" },
-      { when: "2015 — 2019", what: "B.E., Information Technology", where: "Anna University, India" }
-    ],
-    awards: [
-      { when: "2025", what: "Best Student Paper", where: "USENIX Security" },
-      { when: "2024", what: "Dean's Doctoral Fellowship", where: "University of South Carolina" },
-      { when: "2024", what: "NSF Travel Grant", where: "SIGCOMM" },
-      { when: "2023", what: "Graduate Teaching Award", where: "College of Engineering" }
-    ],
-    service: [
-      { when: "2025", what: "PC Member", where: "ACM IMC (Internet Measurement Conference)" },
-      { when: "2024 — Now", what: "Reviewer", where: "IEEE/ACM Trans. on Networking" },
-      { when: "2024", what: "Shadow PC", where: "NSDI" },
-      { when: "2023 — Now", what: "Student Mentor", where: "USC GradWomen in CS" }
+      {
+        when: "Aug 2024 — Present",
+        what: "Doctor of Philosophy (Ph.D.), Informatics",
+        where: "University of South Carolina, Columbia · GPA: 4.0/4.0"
+      },
+      {
+        when: "Aug 2022 — Dec 2023",
+        what: "Master of Science (M.S.), Computer Engineering",
+        where: "Illinois Institute of Technology, Chicago · GPA: 3.4/4.0"
+      },
+      {
+        when: "Aug 2014 — May 2018",
+        what: "Bachelor of Technology (B.Tech), Telecommunication Engineering",
+        where: "BMS Institute of Technology, Bangalore · GPA: 3.2/4.0"
+      }
     ],
     experience: [
-      { when: "Summer 2025", what: "Research Intern", where: "Cloudflare · Network Intelligence" },
-      { when: "Summer 2023", what: "Research Intern", where: "Akamai Threat Research" }
+      {
+        when: "May 2023 — Aug 2023",
+        what: "Software Engineer Intern",
+        where: "Keysight Technologies, Calabasas, CA",
+        bullets: [
+          "Developed APIs for DASH (Disaggregated SONiC Hosts) as part of open-source project SONiC-net/DASH.",
+          "Introduced support for fixed SAI (Switch Abstraction Interface) headers in DASH-libsai code generator using C++.",
+          "Executed underlay routing table P4 logic for routing and tweaked functionality for optimal performance.",
+          "Formulated test cases in Python using the pytest framework to validate static routing capabilities."
+        ]
+      },
+      {
+        when: "Jul 2018 — Jul 2022",
+        what: "Software Engineer",
+        where: "Opennets (Dhavala Enterprises), Bangalore",
+        bullets: [
+          "Engineered a cross-platform Web IDE for Data Plane programming supporting P4 and NPL languages using Angular 8+, NodeJS, MongoDB, REST, ExpressJS, Python and C++.",
+          "Deployed a multi-user cloud-based compiler system on AWS with Auto Scaling, ELB, and Python orchestration scripts.",
+          "Built interactive network emulation capabilities embedding terminals for each node using Xterm.js.",
+          "Developed a lightweight Docker-based P4 compiler, reducing compilation time by 40%.",
+          "Led and mentored a team of interns to extend the IDE with GUI-based network topology creation."
+        ]
+      }
+    ],
+    papers: [
+      {
+        when: "Submitted 2025",
+        what: "Real-Time Encrypted Traffic Classification using P4-DPDK",
+        where: "92% accuracy · 100 Gbps background traffic · FABRIC testbed · Random Forest model"
+      },
+      {
+        when: "Oct 2025",
+        what: "Evaluating Encryption Overhead and Offload Techniques in High-Speed Data Transfers",
+        where: "Poster · FABRIC KNIT 11 · Salt Lake City, UT"
+      },
+      {
+        when: "Mar 2025",
+        what: "Real-Time Encrypted Traffic Classification with P4-DPDK",
+        where: "Poster & Demo · FABRIC KNIT 10 · Chapel Hill, NC"
+      }
+    ],
+    grants: [
+      {
+        when: "2024 — Present",
+        what: "Lab Library: DPU Programming using DOCA",
+        where: "NSF 2417823 CyberTraining Project · Five-lab series on NVIDIA DOCA framework covering initialization, device subsystem, memory management, task execution, and accelerator invocation."
+      },
+      {
+        when: "2024 — Present",
+        what: "Lab Library: DPU Programming using P4",
+        where: "NSF 2417823 CyberTraining Project · Labs covering programmable pipelines, packet mirroring, match-action tables, externs, meters, and runtime rule updates on BlueField DPUs."
+      }
+    ],
+    certifications: [
+      { when: "Aug 2025", what: "Cisco Certified Network Associate (CCNA): CyberOps Associate", where: "Cisco" },
+      { when: "Jun 2025", what: "Introducing Generative AI with AWS", where: "Amazon Web Services" },
+      { when: "May 2025", what: "Cisco Certified Network Associate (CCNA): Introduction to Networks", where: "Cisco" },
+      { when: "Jul 2024", what: "Supervised Machine Learning: Regression and Classification", where: "Coursera / Stanford" },
+      { when: "May 2020", what: "Programming for Everybody (Python)", where: "Coursera / University of Michigan" },
+      { when: "May 2020", what: "Python Data Structures", where: "Coursera / University of Michigan" }
     ],
     skills: [
-      "P4, eBPF, DPDK",
-      "BGP, IS-IS, OSPF",
-      "Tofino & Wedge",
-      "Python, Rust, C",
-      "Containerlab, GNS3",
-      "PyTorch, JAX",
-      "Suricata, Zeek"
+      "P4", "NPL", "DOCA", "DPDK",
+      "C", "C++", "Python", "JavaScript",
+      "Zeek", "Suricata",
+      "Pytest", "Angular 8+", "Node.JS", "Express.JS", "Xterm.JS",
+      "Docker", "Git", "Mininet", "SQL", "MongoDB",
+      "AWS", "VMware", "FABRIC", "Kubernetes", "NETLAB"
     ]
   }
 };
