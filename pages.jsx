@@ -42,12 +42,12 @@ function HomePage({ go, data }) {
       <div className="atlas-headline">
         <div className="eyebrow">PhD Candidate · University of South Carolina · Computer Networks & Security</div>
         <h1>
-          Research,<br/>
-          labs &amp; writing<br/>
-          <em>mapped live.</em>
+          A home for<br/>
+          everyone<br/>
+          <em>learning networks.</em>
         </h1>
         <p>
-          Explore papers, hands-on security labs, blog posts, and courses — all organized as an interactive network map. Hover any node to preview. Click to dive in.
+          Explore papers, hands-on labs, blog posts, and courses — all organized as an interactive network map. Hover any node to preview. Click to dive in.
         </p>
       </div>
 
