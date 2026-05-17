@@ -2,13 +2,13 @@
 const { useState, useEffect, useRef } = React;
 
 const INDUSTRY_NEWS = [
-  'Agentic AI Replaces Network Copilots Industry-Wide',
-  'Wi-Fi 7 Enterprise Adoption Accelerating Fastest Ever',
-  'Nokia & Ericsson Split Virgin Media O2 5G Contract',
-  'Data Center Networking Market Hits $103 Billion',
-  'Belden-Ruckus Deal Reshapes IT/OT Networking',
-  '$749B Projected for AI Infrastructure by 2028',
-  'Telecom OSS/BSS Silos Finally Breaking Down',
+  'Agentic AI replaces network copilots industry-wide',
+  'Wi-Fi 7 enterprise adoption accelerating fast',
+  'Nokia & Ericsson split Virgin Media O2 5G deal',
+  'Data center networking market hits $103 billion',
+  'Belden-Ruckus deal reshapes IT/OT networking',
+  '$749B projected for AI infrastructure by 2028',
+  'Telecom OSS/BSS silos finally breaking down',
 ];
 
 function SunIcon() {
@@ -273,3 +273,4 @@ function App() {
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(<App />);
+            
