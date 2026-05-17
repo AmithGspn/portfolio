@@ -82,13 +82,6 @@ const SECTIONS = [
 function Nav({ route, go, theme, setTheme, onOpenCmd }) {
   const activeKey = route.page.split('-')[0];
 
-  // UTC clock
-  const [time, setTime] = useState(() => new Date());
-  useEffect(() => {
-    const id = setInterval(() => setTime(new Date()), 1000);
-    return () => clearInterval(id);
-  }, []);
-  const utc = time.toISOString().slice(11, 19);
 
   // News ticker
   const [newsIdx, setNewsIdx] = useState(0);
@@ -132,10 +125,6 @@ function Nav({ route, go, theme, setTheme, onOpenCmd }) {
           <span className="brand-name">Amith Gspn</span>
         </div>
 
-        {/* ── Telemetry mini ── */}
-        <div className="nav-telemetry">
-          <span className="nav-tel-cell">UTC <span className="val">{utc}</span></span>
-        </div>
 
         {/* ── NET NEWS center ── */}
         <div className="nav-news">
@@ -166,9 +155,6 @@ function Nav({ route, go, theme, setTheme, onOpenCmd }) {
           </button>
           <div className="nav-tel-cell" style={{ borderLeft: '1px solid var(--line)', paddingLeft: 12 }}>
             <span className="visitor-dot-inline">●</span> VISITORS <span className="val">{visitors.toLocaleString()}</span>
-          </div>
-          <div className="nav-tel-cell nav-uplink">
-            UPLINK <span className="hot">●</span> <span className="val">UP</span>
           </div>
         </div>
 
