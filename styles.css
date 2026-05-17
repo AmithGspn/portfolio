@@ -326,6 +326,9 @@ a:hover { color: var(--accent); }
   display: flex;
   align-items: center;
   min-width: 0;
+  /* Fade edges so text gracefully dissolves instead of hard-clipping */
+  -webkit-mask-image: linear-gradient(to right, transparent 0%, black 12%, black 82%, transparent 100%);
+  mask-image: linear-gradient(to right, transparent 0%, black 12%, black 82%, transparent 100%);
 }
 .nav-news-item {
   position: absolute;
@@ -354,8 +357,8 @@ a:hover { color: var(--accent); }
   height: 60px;
 }
 .nav-link {
-  font-size: 14px;
-  padding: 7px 14px;
+  font-size: 13px;
+  padding: 6px 11px;
   border-radius: 999px;
   cursor: pointer;
   color: var(--fg-muted);
@@ -1479,9 +1482,3 @@ a:hover { color: var(--accent); }
 /* Small mobile — 480px */
 @media (max-width: 480px) {
   .nav-inner { padding: 0 12px; }
-  .brand-name { display: none; } /* just show the icon on very small screens */
-  .theme-icon-btn { padding: 6px 8px; }
-  .atlas-headline h1 { font-size: clamp(32px, 11vw, 48px); }
-  .container { padding: 0 14px; }
-  .page-header h1 { font-size: clamp(32px, 11vw, 48px); }
-}
